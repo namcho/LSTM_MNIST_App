@@ -11,7 +11,7 @@ from tensorflow import keras
 from datetime import datetime
 
 # Model name that we're gonna generate
-model_name = 'lstm_mnist_v1'
+model_name = 'lstm_mnist_v2'
 
 # Lets use keras mnist data-set
 mnist = tf.keras.datasets.mnist
@@ -47,7 +47,7 @@ print('Y_test_oh.shape = ', Y_test_oh.shape)
 model_lstm = Sequential()
 
 # Kind of encoding
-model_lstm.add(LSTM(32, input_shape=(Tx, features), activation='tanh', return_sequences=False, stateful=False, name="Layer0_LSTM"))
+model_lstm.add(LSTM(64, input_shape=(Tx, features), activation='tanh', return_sequences=False, stateful=False, name="Layer0_LSTM"))
 
 # Output layer which is going to give probabilities of 0-9 numbers
 model_lstm.add(Dense(class_count, activation='softmax', name="LayerF_Dense"))
@@ -71,11 +71,11 @@ model_lstm.compile(loss=loss_cce, optimizer=opt_sgd, metrics=metric2)
 model_lstm = keras.models.load_model('model_outputs/' + model_name)
 
 # TensorBoard
-log_dir = "logs/fit/" + model_name + datetime.now().strftime("%Y%m%d-%H%M%S")
+log_dir = "logs/fit/" + model_name + '_' + datetime.now().strftime("%Y%m%d-%H%M%S")
 tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=1)
 
 # Lets the education begins!
-history = model_lstm.fit(x=X_train, y=Y_train_oh, epochs=10, batch_size = 32, validation_data=(X_test, Y_test_oh),
+history = model_lstm.fit(x=X_train, y=Y_train_oh, epochs=20, batch_size = 32, validation_data=(X_test, Y_test_oh),
 				callbacks=[tensorboard_callback], shuffle=True)
                 #callbacks=[tensorboard_callback, model_checkpoint_cb],
                 #shuffle=True)
