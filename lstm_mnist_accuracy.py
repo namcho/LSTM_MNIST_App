@@ -8,17 +8,17 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, LSTM
 from tensorflow import keras
 
-# Keras'in resimleri kullanilacak
+# Lets use keras mnist data-set
 mnist = tf.keras.datasets.mnist
 (X_train, Y_train),(X_test, Y_test) = mnist.load_data()
 
-# Input verilerini normalize edelim...
-# Kullanilan data-set de, her bir pixel icin 0-255 RBG kod degeri kullaniliyor
-# verileri normalize etmek icin 255'e bolmemiz yeterli
+# Normalize the input datas - jsut for Xs
+# Every pixel have 8bits value so every single feature we have between 0 and 255
+# We need to divide input tensors by 255.0 to normalize.
 X_train = X_train / 255.0
 X_test = X_test / 255.0
 
-# 0 - 9 rakamlari
+# 0 - 9 numbers
 class_count = 10
 
 print('X_train.shape = ' + str(X_train.shape))
@@ -33,7 +33,7 @@ for i in range(len(Y_test)):
 	Y_test_oh[i,Y_test[i]] = 1;
 
 model_lstm = tf.keras.models.load_model('./model_outputs/lstm_mnist_v1')
-model_lstm.summary()
+#model_lstm.summary()
 
 score = model_lstm.evaluate(X_test, Y_test_oh)
 print('Evaulate.score = ', score)

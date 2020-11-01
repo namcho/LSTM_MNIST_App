@@ -9,16 +9,16 @@ from tensorflow.keras.layers import Dense, Dropout, LSTM
 from tensorflow import keras
 from matplotlib import pyplot as plt
 
-# 0 - 9 rakamlari
+# 0 - 9 numbers
 class_count = 10
 
-# Keras'in resimleri kullanilacak
+# Lets use keras mnist data-set
 mnist = tf.keras.datasets.mnist
 (X_train, Y_train),(X_test, Y_test) = mnist.load_data()
 
-# Input verilerini normalize edelim...
-# Kullanilan data-set de, her bir pixel icin 0-255 RBG kod degeri kullaniliyor
-# verileri normalize etmek icin 255'e bolmemiz yeterli
+# Normalize the input datas - jsut for Xs
+# Every pixel have 8bits value so every single feature we have between 0 and 255
+# We need to divide input tensors by 255.0 to normalize.
 X_train = X_train / 255.0
 X_test = X_test / 255.0
 
@@ -29,7 +29,7 @@ Y_train_oh = np.zeros((Y_train.shape[0], class_count))
 for i in range(len(Y_train)):
 	Y_train_oh[i,Y_train[i]] = 1;
 
-model_lstm = keras.models.load_model('model_outputs/LSTM_DNN_1.h5')
+model_lstm = keras.models.load_model('model_outputs/lstm_mnist_v1')
 #model_lstm.summary()
 
 indx_pred = int(input('Prediction index: '))
