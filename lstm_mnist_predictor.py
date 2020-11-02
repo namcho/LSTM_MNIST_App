@@ -29,7 +29,7 @@ Y_train_oh = np.zeros((Y_train.shape[0], class_count))
 for i in range(len(Y_train)):
 	Y_train_oh[i,Y_train[i]] = 1;
 
-model_lstm = keras.models.load_model('model_outputs/lstm_mnist_v1')
+model_lstm = keras.models.load_model('model_outputs/lstm_mnist_v3')
 #model_lstm.summary()
 
 indx_pred = int(input('Prediction index: '))
