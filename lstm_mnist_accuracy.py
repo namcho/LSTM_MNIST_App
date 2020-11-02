@@ -32,7 +32,7 @@ Y_test_oh = np.zeros((Y_test.shape[0], class_count))
 for i in range(len(Y_test)):
 	Y_test_oh[i,Y_test[i]] = 1;
 
-model_lstm = tf.keras.models.load_model('./model_outputs/lstm_mnist_v1')
+model_lstm = tf.keras.models.load_model('./model_outputs/lstm_mnist_v3')
 #model_lstm.summary()
 
 score = model_lstm.evaluate(X_test, Y_test_oh)
