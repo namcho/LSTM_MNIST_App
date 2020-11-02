@@ -1,4 +1,11 @@
-# https://keras.io/guides/functional_api/
+'''
+    @brief LSTM based hand-written number detection. 
+        28x28 pixel dimension mnist data set is used. 
+        In every time-step one slice column of the picture is feeding to LSTM
+
+    @author NAZIM YILDIZ
+    @version 0001
+'''
 import logging
 logging.getLogger("tensorflow").setLevel(logging.ERROR)
 import os
